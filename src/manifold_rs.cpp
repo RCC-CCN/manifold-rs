@@ -112,6 +112,14 @@ namespace manifold_rs
         return std::make_unique<std::vector<uint32_t>>(mesh->triVerts);
     }
 
+    const std::vector<float>& Mesh::zero_copy_vertices() const {
+        return mesh->vertProperties;
+      }
+    
+      const std::vector<uint32_t>& Mesh::zero_copy_indices() const {
+        return mesh->triVerts;
+      }
+
     std::unique_ptr<Mesh> mesh_from_manifold(const Manifold &manifold)
     {
         auto mesh = manifold.manifold->GetMeshGL(0);

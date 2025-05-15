@@ -96,6 +96,10 @@ mod ffi {
         /// Get the indices of the mesh.
         fn indices(self: &Mesh) -> UniquePtr<CxxVector<u32>>;
 
+
+        fn zero_copy_vertices(self: &Mesh) -> &CxxVector<f32>;
+        fn zero_copy_indices(self: &Mesh)  -> &CxxVector<u32>;
+
         /// Create a mesh from a manifold.
         fn mesh_from_manifold(manifold: &Manifold) -> UniquePtr<Mesh>;
 
@@ -284,6 +288,16 @@ impl Mesh {
         let indices_binding = self.0.indices();
         let indices = indices_binding.as_ref().unwrap().as_slice();
         indices.to_vec()
+    }
+
+    /// Get the vertices of the mesh.
+    pub fn zero_copy_vertices(&self) -> &[f32]{
+        self.0.as_ref().unwrap().zero_copy_vertices().as_slice()
+    }
+
+    /// Get the indices of the mesh.
+    pub fn zero_copy_indices(&self) -> &[u32] {
+        self.0.as_ref().unwrap().zero_copy_indices().as_slice()
     }
 
     /// Get the manifold representation of the mesh.

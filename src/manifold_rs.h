@@ -140,6 +140,10 @@ namespace manifold_rs
 
         /// @brief  Get the indices of the mesh
         std::unique_ptr<std::vector<uint32_t>> indices() const;
+        
+
+        const std::vector<float>& zero_copy_vertices() const;
+        const std::vector<uint32_t>& zero_copy_indices()  const;
 
         std::unique_ptr<::manifold::Mesh> mesh;
     };
